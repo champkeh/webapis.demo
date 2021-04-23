@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Page Visibility API</title>
+    <style>
+        body {
+            color: #eef;
+            max-width: 680px;
+            background: rgb(34, 34, 51);
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+        }
+        video {
+            box-shadow: 0 10px 20px 10px #001;
+            max-width: 100%;
+            width: 640px;
+        }
+    </style>
+</head>
+<body>
+<h1>Page Visibility API</h1>
+<video id="videoElement" controls="" poster="http://daniemon.com/tech/webapps/page-visibility/thumbnail.jpg">
+    <source src="https://s3-ap-northeast-1.amazonaws.com/daniemon/demos/The%2BVillage-Mobile.mp4" type="video/mp4" media="all and (max-width:680px)">
+    <source src="https://s3-ap-northeast-1.amazonaws.com/daniemon/demos/The%2BVillage-Mobile.webm" type="video/webm" media="all and (max-width:680px)">
+    <source src="https://s3-ap-northeast-1.amazonaws.com/daniemon/demos/The%2BVillage-SD.mp4" type="video/mp4">
+    <source src="https://s3-ap-northeast-1.amazonaws.com/daniemon/demos/The%2BVillage-SD.webm" type="video/webm">
+    <p>Sorry, there's a problem playing this video. Please try using a different browser.</p>
+</video>
+<script>
+    (function() {
+        'use strict';
+
+        const videoElement = document.querySelector('#videoElement')
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                videoElement.pause()
+            } else {
+                videoElement.play()
+            }
+        }, false)
+    })();
+</script>
+</body>
+</html>
