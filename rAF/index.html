@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>rAF</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+        .box {
+            width: 200px;
+            height: 200px;
+            background: antiquewhite;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+<div class="box box1"></div>
+<div class="box box2"></div>
+<script>
+    const element1 = document.querySelector('.box1')
+    const element2 = document.querySelector('.box2')
+    let start1, previousTimeStamp1
+    let start2, previousTimeStamp2
+
+
+    function step1(timestamp) {
+        if (start1 === undefined) {
+            start1 = timestamp
+        }
+        const elapsed = timestamp - start1
+
+        if (previousTimeStamp1 !== timestamp) {
+            const count = Math.min(0.1 * elapsed, 600)
+            element1.style.transform = `translateX(${count}px)`
+        }
+
+        if (elapsed < 6000) {
+            previousTimeStamp1 = timestamp
+            window.requestAnimationFrame(step1)
+        }
+    }
+
+    let i = 0;
+    function step2(timestamp) {
+        if (i > 600) return
+
+        element2.style.transform = `translateX(${i}px)`
+
+        window.requestAnimationFrame(step2)
+        i+= 1.66666
+    }
+
+    window.requestAnimationFrame(step1)
+    window.requestAnimationFrame(step1)
+    window.requestAnimationFrame(step2)
+    window.requestAnimationFrame(step2)
+    window.requestAnimationFrame(step2)
+
+</script>
+</body>
+</html>

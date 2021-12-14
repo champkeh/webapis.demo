@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BroadcastChannel</title>
+</head>
+<body>
+<button>登录</button>
+
+<script>
+  const bc = new BroadcastChannel('test')
+  bc.onmessage = event => {
+    console.log(event)
+  }
+</script>
+
+</body>
+</html>

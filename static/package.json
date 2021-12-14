@@ -1,0 +1,25 @@
+{
+  "name": "webapis.demo",
+  "version": "1.0.0",
+  "description": "学习浏览器的Web Apis",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/champkeh/webapis.demo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/champkeh/webapis.demo/issues"
+  },
+  "homepage": "https://github.com/champkeh/webapis.demo#readme",
+  "dependencies": {
+    "koa": "^2.13.1",
+    "koa-static": "^5.0.0"
+  }
+}

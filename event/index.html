@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>document.readyState</title>
+</head>
+<body>
+<div style="width: 200px !important;height: 300px;background-color: azure"></div>
+<img src="../static/images/dog.png" alt="dog">
+<script>
+    document.addEventListener('readystatechange', (evt) => {
+        console.log(evt)
+        console.log(document.readyState)
+        if (document.readyState === 'interactive') {
+            setTimeout(() => {
+                console.log(1)
+                window.addEventListener('DOMContentLoaded', (evt) => {
+                    console.log(evt)
+                })
+            }, 0)
+            Promise.resolve().then(() => {
+                console.log(11)
+            })
+        } else if (document.readyState === 'complete') {
+            window.addEventListener('load', (evt) => {
+                console.log(evt)
+            })
+            setTimeout(() => {
+                console.log(2)
+            }, 0)
+            Promise.resolve().then(() => {
+                console.log(22)
+            })
+        }
+    })
+</script>
+</body>
+</html>

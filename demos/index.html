@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>人脸识别</title>
+</head>
+<body>
+<video src=""></video>
+
+<script>
+  navigator.mediaDevices.getUserMedia({video: true, audio: false}).then(mediaStream => {
+    var video = document.querySelector('video');
+    video.srcObject = mediaStream;
+    video.onloadedmetadata = function(e) {
+      video.play();
+    };
+  }).catch(err => {
+    console.log(err.name + ": " + err.message);
+  })
+</script>
+</body>
+</html>

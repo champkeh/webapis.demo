@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="load-btn">加载css文件</button>
+<button id="start-observe-btn">开始监听DOM</button>
+<button id="stop-observe-btn">停止监听DOM</button>
+<div class="banner" data-v-6ad9ead8></div>
+<script>
+    const btn = document.querySelector('#load-btn')
+    btn.addEventListener('click', evt => {
+        loadCssResource('https://test.jz-ins.com/ecommerce-ins/css/product.f6576f7f.css')
+    })
+
+    function loadCssResource(href) {
+        const link = document.createElement('link')
+        link.href = href
+        link.rel = 'stylesheet'
+        link.type = 'text/css'
+        link.crossOrigin = 'anonymous'
+        document.querySelector('head').appendChild(link)
+    }
+
+    const observer = new MutationObserver(mutationHandler)
+    let observing = false
+    const startObserveBtn = document.querySelector('#start-observe-btn')
+    startObserveBtn.addEventListener('click', evt => {
+        if (observing) return
+
+        console.log('开始监听DOM')
+        observing = true
+        observer.observe(document, {
+            attributes: true,
+            attributeOldValue: true,
+            characterData: true,
+            characterDataOldValue: true,
+            childList: true,
+            subtree: true,
+        })
+    })
+    const stopObserveBtn = document.querySelector('#stop-observe-btn')
+    stopObserveBtn.addEventListener('click', evt => {
+        if (!observing) return
+
+        console.log('停止监听DOM')
+        observing = false
+        observer.disconnect()
+    })
+    function mutationHandler(mutations) {
+        mutations.forEach(mutation => {
+            switch (mutation.type) {
+                case 'childList':
+                    mutation.addedNodes.forEach(node => handleAddedNode(node))
+                    break
+                default:
+                    break
+            }
+        })
+    }
+    function handleAddedNode(node) {
+        console.log(node)
+        serializeNode(node)
+    }
+    function serializeNode(node) {
+        switch (node.nodeType) {
+            case node.ELEMENT_NODE:
+                const tagName = node.tagName.toLowerCase().trim()
+                console.log(tagName)
+                if (tagName === 'link') {
+                    const stylesheet = Array.from(document.styleSheets).find(s => {
+                        return s.href === node.href
+                    })
+                    console.log(stylesheet)
+                    if (!stylesheet) {
+                        // 样式还没有加载及解析完成
+                        node.onload = () => {
+                            serializeNode(node)
+                        }
+                        node.onerror = () => {
+                            console.log('加载失败')
+                        }
+                    }
+                }
+                break
+        }
+    }
+</script>
+</body>
+</html>
