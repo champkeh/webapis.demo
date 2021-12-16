@@ -2,12 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Accept-CH" content="Device-Memory">
     <title>Title</title>
+    <script src="rrweb-snapshot.js"></script>
+    <script>
+        console.log(rrwebSnapshot)
+        const result = rrwebSnapshot.transformAttribute(document, 'table', 'background', '../../../bg.png')
+        console.log(result)
+    </script>
 </head>
 <body>
-<button id="load-btn">加载css文件</button>
+<p>打开控制台查看效果</p>
 <button id="start-observe-btn">开始监听DOM</button>
 <button id="stop-observe-btn">停止监听DOM</button>
+<button id="load-btn">加载css文件</button>
 <div class="banner" data-v-6ad9ead8></div>
 <script>
     const btn = document.querySelector('#load-btn')

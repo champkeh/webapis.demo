@@ -9,5 +9,5 @@ function makeArray2(num) {
 }
 
 
-console.log(makeArray(5))
-console.log(makeArray2(5))
+// console.log(makeArray(5))
+// console.log(makeArray2(5))
